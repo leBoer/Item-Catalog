@@ -12,7 +12,7 @@ a {text-decoration: none; color:#FFFFCC; font-size: .75em;}
     border-radius: 25px; padding: 5px; margin: 5px; border-color: #999999; background-color: #333333;}
 .header         {left:50%; text-align: center;}
 .name {width:40%;display: inline-block; color: #FFFFCC;}
-.description {}
+.description {color: #CCCCCC; font-size: .75em; max-width: 50%}
 .price {text-align: right; width:40%; display: inline-block; color: #FFFFCC}
 .editdeletepane{}
 

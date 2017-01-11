@@ -4,6 +4,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Restaurant, MenuItem
 app = Flask(__name__)
+app.secret_key = '9JF(=r2[/Q3n3&.N'
 
 engine = create_engine('sqlite:///restaurantmenu.db')
 Base.metadata.bin = engine
@@ -65,6 +66,7 @@ def editRestaurant(restaurant_id):
             editRestaurant.name = request.form['name']
             session.add(editRestaurant)
             session.commit()
+            flash("Restaurant Successfully Edited")
             return redirect(url_for('showRestaurants'))
     else:
         return render_template('editrestaurant.html',
@@ -81,6 +83,7 @@ def deleteRestaurant(restaurant_id):
     if request.method == 'POST':
         session.delete(deleteRestaurant)
         session.commit()
+        flash("Restaurant Successfully Deleted")
         return redirect(url_for('showRestaurants'))
     else:
         return render_template('deleterestaurant.html',
@@ -114,6 +117,7 @@ def newMenuItem(restaurant_id):
                                    restaurant_id=restaurant_id)
             session.add(newMenuItem)
             session.commit()
+            flash("Menu Item Created")
             return redirect(url_for('showMenu', restaurant_id=restaurant_id))
     else:
         return render_template('newmenuitem.html',
@@ -134,6 +138,7 @@ def editMenuItem(restaurant_id, menu_id):
             editMenuItem.price = request.form['price']
             session.add(editMenuItem)
             session.commit()
+            flash("Menu Item Successfully Edited")
             return redirect(url_for('showMenu', restaurant_id=restaurant_id))
     else:
         return render_template('editmenuitem.html', item=editMenuItem)
@@ -148,6 +153,7 @@ def deleteMenuItem(restaurant_id, menu_id):
     if request.method == 'POST':
         session.delete(deleteMenuItem)
         session.commit()
+        flash("Menu Item Successfully Deleted")
         return redirect(url_for('showMenu', restaurant_id=restaurant_id))
     else:
         return render_template('deletemenuitem.html',
